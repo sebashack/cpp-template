@@ -1,5 +1,5 @@
-#include "foo.h"
-#include "bar.cpp"
+#include "Foo.h"
+#include "Bar.cpp"
 
 int main()
 {

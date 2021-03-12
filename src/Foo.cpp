@@ -1,5 +1,5 @@
 #include <iostream>
-#include "foo.h"
+#include "Foo.h"
 
 
 void Foo::do_something()
