@@ -5,9 +5,10 @@
 class Bar
 {
 
-  public:
+public:
     std::string str;
-    void do_something() {
-      std::cout << "Doing something!" << this->str << std::endl;
+    void do_something()
+    {
+        std::cout << "Doing something!" << this->str << std::endl;
     }
 };

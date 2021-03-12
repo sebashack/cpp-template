@@ -4,5 +4,5 @@
 
 void Foo::do_something()
 {
-  std::cout << "Doing something!" << this->str << std::endl;
+    std::cout << "Doing something!" << this->str << std::endl;
 }

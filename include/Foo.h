@@ -5,7 +5,7 @@
 class Foo
 {
 
-  public:
+public:
     std::string str;
     void do_something();
 };

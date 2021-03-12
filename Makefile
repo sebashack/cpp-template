@@ -16,6 +16,11 @@ build: ${OBJECTS}
 	cd ${SOURCE_DIR} && g++ -std=c++17 -I${INCLUDES_DIR} -o ${BIN_NAME} ${OBJECTS}
 	cd ${SOURCE_DIR} && mv *.o ${BIN_NAME} ${DIST_DIR}
 
+.PHONY: restyle
+restyle:
+	astyle --mode=c -n --style=allman ${CURDIR}/src/*.cpp
+	astyle --mode=c -n --style=allman ${CURDIR}/include/*.h
+
 .PHONY: clean
 clean:
 	rm -rf ${DIST_DIR}
