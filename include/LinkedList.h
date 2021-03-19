@@ -51,6 +51,7 @@ public:
     ~LinkedList();
 
     void insert(T elem);
+    void push(T elem);
     T pop();
     bool isEmpty();
     void print();
@@ -103,6 +104,23 @@ void LinkedList<T>::insert(T elem)
     {
         this->tail->next = newNode;
         this->tail = this->tail->next;
+    }
+}
+
+template<typename T>
+void LinkedList<T>::push(T elem)
+{
+    Node<T>* newNode = new Node(elem);
+
+    if (this->head == NULL)
+    {
+        this->head = newNode;
+        this->tail = newNode;
+    }
+    else
+    {
+        newNode->next = this->head;
+        this->head = newNode;
     }
 }
 

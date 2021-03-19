@@ -18,6 +18,18 @@ int main()
     std::cout << "Val " << l.pop() << std::endl;
     std::cout << "Val " << l.pop() << std::endl;
 
+    l.push(1);
+    l.push(2);
+    l.push(3);
+    l.push(4);
+    l.push(5);
+
+    std::cout << "Val " << l.pop() << std::endl;
+    std::cout << "Val " << l.pop() << std::endl;
+    std::cout << "Val " << l.pop() << std::endl;
+    std::cout << "Val " << l.pop() << std::endl;
+    std::cout << "Val " << l.pop() << std::endl;
+
     l.print();
 
     //Person p("Sebastian", 1.81, 68.0);
