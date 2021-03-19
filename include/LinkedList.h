@@ -12,8 +12,36 @@ public:
 
     T value;
     Node<T>* next;
+
+    void print();
 };
 
+template<typename T>
+Node<T>::~Node()
+{
+    std::cout << "Node object destroyed" << std::endl;
+}
+
+template<typename T>
+Node<T>::Node(T elem)
+{
+    this->value = elem;
+    this->next = NULL;
+}
+
+template<typename T>
+void Node<T>::print()
+{
+    Node* nextNode = this->next;
+
+    std::cout << this->value << std::endl;
+
+    while (nextNode != NULL)
+    {
+        std::cout << nextNode->value << std::endl;
+        nextNode = nextNode->next;
+    }
+}
 
 template<typename T>
 class LinkedList
@@ -25,24 +53,13 @@ public:
     void insert(T elem);
     T pop();
     bool isEmpty();
+    void print();
 
 private:
     Node<T>* head;
     Node<T>* tail;
 };
 
-template<typename T>
-Node<T>::Node(T elem)
-{
-    this->value = elem;
-    this->next = NULL;
-}
-
-template<typename T>
-Node<T>::~Node()
-{
-    std::cout << "Node object destroyed" << std::endl;
-}
 
 template<typename T>
 LinkedList<T>::LinkedList()
@@ -55,6 +72,21 @@ template<typename T>
 LinkedList<T>::~LinkedList()
 {
     std::cout << "LinkedList object destroyed" << std::endl;
+}
+
+
+template<typename T>
+void LinkedList<T>::print()
+{
+
+    if (this->isEmpty())
+    {
+        std::cout << "empty" << std::endl;
+    }
+    else
+    {
+        this->head->print();
+    }
 }
 
 template<typename T>
@@ -77,11 +109,26 @@ void LinkedList<T>::insert(T elem)
 template<typename T>
 T LinkedList<T>::pop()
 {
-    T value = this->head->value;
-    this->head = this->tail;
-    this->tail = this->tail->next;
+    if (this->head == NULL)
+    {
+        return NULL;
+    }
+    else
+    {
+        T value = this->head->value;
 
-    return value;
+        if (this->head->next == NULL)
+        {
+            this->head = NULL;
+            this->tail = NULL;
+        }
+        else
+        {
+            this->head = this->head->next;
+        }
+
+        return value;
+    }
 }
 
 
