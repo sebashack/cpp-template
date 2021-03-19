@@ -8,19 +8,12 @@ class Node
 {
 public:
     Node(T elem);
-    ~Node();
 
     T value;
     Node<T>* next;
 
     void print();
 };
-
-template<typename T>
-Node<T>::~Node()
-{
-    std::cout << "Node object destroyed" << std::endl;
-}
 
 template<typename T>
 Node<T>::Node(T elem)
@@ -72,7 +65,21 @@ LinkedList<T>::LinkedList()
 template<typename T>
 LinkedList<T>::~LinkedList()
 {
-    std::cout << "LinkedList object destroyed" << std::endl;
+    if (this->head != NULL)
+    {
+        Node<T>* nextNode = this->head->next;
+        Node<T>* tmp;
+        delete this->head;
+
+        while (nextNode != NULL)
+        {
+            tmp = nextNode->next;
+            delete nextNode;
+            nextNode = tmp;
+        }
+
+        std::cout << "LinkedList object destroyed" << std::endl;
+    }
 }
 
 

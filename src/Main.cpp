@@ -24,11 +24,11 @@ int main()
     l.push(4);
     l.push(5);
 
-    std::cout << "Val " << l.pop() << std::endl;
-    std::cout << "Val " << l.pop() << std::endl;
-    std::cout << "Val " << l.pop() << std::endl;
-    std::cout << "Val " << l.pop() << std::endl;
-    std::cout << "Val " << l.pop() << std::endl;
+    //std::cout << "Val " << l.pop() << std::endl;
+    //std::cout << "Val " << l.pop() << std::endl;
+    //std::cout << "Val " << l.pop() << std::endl;
+    //std::cout << "Val " << l.pop() << std::endl;
+    //std::cout << "Val " << l.pop() << std::endl;
 
     l.print();
 
