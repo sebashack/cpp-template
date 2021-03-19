@@ -3,7 +3,7 @@ BIN_NAME:=main
 INCLUDES_DIR:=${CURDIR}/include
 SOURCE_DIR:=${CURDIR}/src
 
-SOURCES:=${SOURCE_DIR}/Person.cpp ${SOURCE_DIR}/Bar.cpp ${CURDIR}/src/Main.cpp
+SOURCES:=${SOURCE_DIR}/Person.cpp ${SOURCE_DIR}/LinkedList.cpp ${SOURCE_DIR}/Bar.cpp ${SOURCE_DIR}/Main.cpp
 OBJECTS:=$(patsubst %.cpp,%.o,$(SOURCES))
 
 ${OBJECTS}:
@@ -24,3 +24,4 @@ restyle:
 .PHONY: clean
 clean:
 	rm -rf ${DIST_DIR}
+	rm -rf ${SOURCE_DIR}/*.o
