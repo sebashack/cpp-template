@@ -3,7 +3,7 @@ BIN_NAME:=main
 INCLUDES_DIR:=${CURDIR}/include
 SOURCE_DIR:=${CURDIR}/src
 
-SOURCES:=${SOURCE_DIR}/Person.cpp ${SOURCE_DIR}/LinkedList.cpp ${SOURCE_DIR}/Bar.cpp ${SOURCE_DIR}/Main.cpp
+SOURCES:=${SOURCE_DIR}/Person.cpp ${SOURCE_DIR}/Bar.cpp ${SOURCE_DIR}/Main.cpp
 OBJECTS:=$(patsubst %.cpp,%.o,$(SOURCES))
 
 ${OBJECTS}:
@@ -13,7 +13,7 @@ ${OBJECTS}:
 
 .PHONY: build
 build: ${OBJECTS}
-	cd ${SOURCE_DIR} && g++ -std=c++17 -I${INCLUDES_DIR} -o ${BIN_NAME} ${OBJECTS}
+	cd ${SOURCE_DIR} && g++ -std=c++17 -I${INCLUDES_DIR} ${OBJECTS} -o ${BIN_NAME}
 	cd ${SOURCE_DIR} && mv *.o ${BIN_NAME} ${DIST_DIR}
 
 .PHONY: restyle
