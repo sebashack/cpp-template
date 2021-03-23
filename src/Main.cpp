@@ -4,25 +4,11 @@
 
 int main()
 {
-    LinkedList<int> l;
+    LinkedList<Person> l;
 
-    l.insert(1);
-    l.insert(2);
-    l.insert(3);
-    l.insert(4);
-    l.insert(5);
-
-    std::cout << "Val " << l.pop() << std::endl;
-    std::cout << "Val " << l.pop() << std::endl;
-    std::cout << "Val " << l.pop() << std::endl;
-    std::cout << "Val " << l.pop() << std::endl;
-    std::cout << "Val " << l.pop() << std::endl;
-
-    l.push(1);
-    l.push(2);
-    l.push(3);
-    l.push(4);
-    l.push(5);
+    Person p0("Sebastian", 1.81, 68.0);
+    Person p1("Marco", 1.81, 68.0);
+    Person p2("Edison", 1.81, 68.0);
 
     //std::cout << "Val " << l.pop() << std::endl;
     //std::cout << "Val " << l.pop() << std::endl;
@@ -30,7 +16,25 @@ int main()
     //std::cout << "Val " << l.pop() << std::endl;
     //std::cout << "Val " << l.pop() << std::endl;
 
-    l.print();
+    //l.push(1);
+    //l.push(2);
+    //l.push(3);
+    //l.push(4);
+    //l.push(5);
+
+    l.insert(p0);
+    l.insert(p1);
+    l.insert(p2);
+
+    std::cout << l.pop()->name << std::endl;
+    std::cout << l.pop()->name << std::endl;
+    std::cout << l.pop()->name << std::endl;
+    //std::cout << "Val " << l.pop().name << std::endl;
+    //std::cout << "Val " << l.pop() << std::endl;
+    //std::cout << "Val " << l.pop() << std::endl;
+    //std::cout << "Val " << l.pop() << std::endl;
+
+    //l.print();
 
     //Person p("Sebastian", 1.81, 68.0);
     //Person* p = new Person("Sebastian", 1.81, 68.0);

@@ -9,9 +9,11 @@ Person::Person(std::string name, float height, float weight)
     this->weight = weight;
 }
 
-Person::~Person()
+Person::~Person() {}
+
+std::ostream& operator<< (std::ostream& o, Person const& p)
 {
-    std::cout << "Person object destroyed" << std::endl;
+    return o << p.name;
 }
 
 void Person::setName(std::string name)

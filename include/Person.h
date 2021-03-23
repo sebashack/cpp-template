@@ -7,6 +7,7 @@ class Person
 
 public:
     Person(std::string name, float height, float weight);
+    Person() = default;
     ~Person();
 
     std::string name;
