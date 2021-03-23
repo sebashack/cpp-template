@@ -45,7 +45,7 @@ public:
 
     void insert(T elem);
     void push(T elem);
-    T pop();
+    T* pop();
     bool isEmpty();
     void print();
 
@@ -132,7 +132,7 @@ void LinkedList<T>::push(T elem)
 }
 
 template<typename T>
-T LinkedList<T>::pop()
+T* LinkedList<T>::pop()
 {
     if (this->head == NULL)
     {
@@ -140,7 +140,7 @@ T LinkedList<T>::pop()
     }
     else
     {
-        T value = this->head->value;
+        T* value = &(this->head->value);
 
         if (this->head->next == NULL)
         {
@@ -155,7 +155,6 @@ T LinkedList<T>::pop()
         return value;
     }
 }
-
 
 template<typename T>
 bool LinkedList<T>::isEmpty()
