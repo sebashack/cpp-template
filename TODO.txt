@@ -1,0 +1,9 @@
+- Implement iterator for LinkedList.
+- Insert and push should receive references and not values.
+- pop() should return a references and not a pointer.
+- Implement implement printing for person.
+- Possibly implement sorting
+- Implement double-linked lists + iterators.
+- Implement post_order, in_order insertions.
+- Implement AST trees.
+- Implement AST in Haskell.
