@@ -21,6 +21,8 @@ int main()
     ls.push(p2);
     ls.push(p3);
 
+    std::cout << ls.length() << std::endl;
+
     for (auto it = ls.begin(), end = ls.end(); it != end; ++it)
     {
         std::cout << *it << std::endl;
@@ -30,6 +32,17 @@ int main()
     {
         std::cout << p << std::endl;
     }
+
+    ls.pop();
+    ls.pop();
+    ls.pop();
+    ls.pop();
+    ls.pop();
+    ls.pop();
+    ls.pop();
+    ls.pop();
+
+    std::cout << ls.length() << std::endl;
 
     return 0;
 }

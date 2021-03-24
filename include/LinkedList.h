@@ -10,7 +10,7 @@ public:
     Node(T& v) : value(v) {}
 
     T& value;
-    Node<T>* next;
+    Node<T>* next = nullptr;
 };
 
 template<typename T>
@@ -23,6 +23,7 @@ public:
     void pushBack(T& elem);
     void push(T& elem);
     T* pop();
+    size_t length();
     bool isEmpty();
 
     struct Iterator
@@ -78,6 +79,7 @@ public:
 private:
     Node<T>* head;
     Node<T>* tail;
+    size_t len = 0;
 };
 
 template<typename T>
@@ -122,6 +124,8 @@ void LinkedList<T>::pushBack(T& elem)
         this->tail->next = newNode;
         this->tail = this->tail->next;
     }
+
+    this->len++;
 }
 
 template<typename T>
@@ -139,6 +143,8 @@ void LinkedList<T>::push(T& elem)
         newNode->next = this->head;
         this->head = newNode;
     }
+
+    this->len++;
 }
 
 template<typename T>
@@ -162,8 +168,16 @@ T* LinkedList<T>::pop()
             this->head = this->head->next;
         }
 
+        this->len--;
+
         return value;
     }
+}
+
+template<typename T>
+size_t LinkedList<T>::length()
+{
+    return this->len;
 }
 
 template<typename T>
