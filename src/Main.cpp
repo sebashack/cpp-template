@@ -11,10 +11,10 @@ int main()
     Person p2("Edison", 1.81, 68.0);
     Person p3("Richard", 1.81, 68.0);
 
-    ls.insert(p0);
-    ls.insert(p1);
-    ls.insert(p2);
-    ls.insert(p3);
+    ls.pushBack(p0);
+    ls.pushBack(p1);
+    ls.pushBack(p2);
+    ls.pushBack(p3);
 
     ls.push(p0);
     ls.push(p1);
@@ -26,9 +26,9 @@ int main()
         std::cout << *it << std::endl;
     }
 
-    for (auto it = ls.begin(), end = ls.end(); it != end; ++it)
+    for (Person p : ls)
     {
-        std::cout << *it << std::endl;
+        std::cout << p << std::endl;
     }
 
     return 0;

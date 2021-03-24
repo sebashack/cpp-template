@@ -20,7 +20,7 @@ public:
     LinkedList();
     ~LinkedList();
 
-    void insert(T& elem);
+    void pushBack(T& elem);
     void push(T& elem);
     T* pop();
     bool isEmpty();
@@ -108,7 +108,7 @@ LinkedList<T>::~LinkedList()
 }
 
 template<typename T>
-void LinkedList<T>::insert(T& elem)
+void LinkedList<T>::pushBack(T& elem)
 {
     Node<T>* newNode = new Node(elem);
 
