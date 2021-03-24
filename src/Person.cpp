@@ -13,7 +13,7 @@ Person::~Person() {}
 
 std::ostream& operator<< (std::ostream& o, Person const& p)
 {
-    return o << p.name;
+    return o << "Person(" << p.name << ", " << p.height << ", " << p.weight << ")";
 }
 
 void Person::setName(std::string name)

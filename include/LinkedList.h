@@ -7,34 +7,11 @@ template<typename T>
 class Node
 {
 public:
-    Node(T elem);
+    Node(T& v) : value(v) {}
 
-    T value;
+    T& value;
     Node<T>* next;
-
-    void print();
 };
-
-template<typename T>
-Node<T>::Node(T elem)
-{
-    this->value = elem;
-    this->next = NULL;
-}
-
-template<typename T>
-void Node<T>::print()
-{
-    Node* nextNode = this->next;
-
-    std::cout << this->value << std::endl;
-
-    while (nextNode != NULL)
-    {
-        std::cout << nextNode->value << std::endl;
-        nextNode = nextNode->next;
-    }
-}
 
 template<typename T>
 class LinkedList
@@ -43,11 +20,10 @@ public:
     LinkedList();
     ~LinkedList();
 
-    void insert(T elem);
-    void push(T elem);
+    void insert(T& elem);
+    void push(T& elem);
     T* pop();
     bool isEmpty();
-    void print();
 
 private:
     Node<T>* head;
@@ -82,23 +58,8 @@ LinkedList<T>::~LinkedList()
     }
 }
 
-
 template<typename T>
-void LinkedList<T>::print()
-{
-
-    if (this->isEmpty())
-    {
-        std::cout << "empty" << std::endl;
-    }
-    else
-    {
-        this->head->print();
-    }
-}
-
-template<typename T>
-void LinkedList<T>::insert(T elem)
+void LinkedList<T>::insert(T& elem)
 {
     Node<T>* newNode = new Node(elem);
 
@@ -115,7 +76,7 @@ void LinkedList<T>::insert(T elem)
 }
 
 template<typename T>
-void LinkedList<T>::push(T elem)
+void LinkedList<T>::push(T& elem)
 {
     Node<T>* newNode = new Node(elem);
 

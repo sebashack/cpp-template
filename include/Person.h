@@ -21,5 +21,7 @@ public:
     void printName();
     void printHeight();
     void printWeight();
+
+    friend std::ostream& operator<< (std::ostream& o, Person const& p);
 private:
 };

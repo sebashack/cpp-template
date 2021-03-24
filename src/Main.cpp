@@ -26,9 +26,10 @@ int main()
     l.insert(p1);
     l.insert(p2);
 
-    std::cout << l.pop()->name << std::endl;
-    std::cout << l.pop()->name << std::endl;
-    std::cout << l.pop()->name << std::endl;
+    std::cout << *(l.pop()) << std::endl;
+    std::cout << *(l.pop()) << std::endl;
+    std::cout << *(l.pop()) << std::endl;
+
     //std::cout << "Val " << l.pop().name << std::endl;
     //std::cout << "Val " << l.pop() << std::endl;
     //std::cout << "Val " << l.pop() << std::endl;
