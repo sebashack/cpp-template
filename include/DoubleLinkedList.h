@@ -25,6 +25,7 @@ public:
     void push(T& elem);
     T& getAt(size_t i) const;
     void insertAt(T& elem, size_t i);
+    T* removeAt(size_t i);
     T* pop();
     T* popLast();
     size_t length() const;
@@ -182,9 +183,44 @@ T* DoubleLinkedList<T>::popLast()
 }
 
 template<typename T>
-void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
+T* DoubleLinkedList<T>::removeAt(size_t i)
 {
     if (i < 0 || i >= this->length())
+    {
+        throw "Index out of range";
+    }
+
+    if (i == 0)
+    {
+        return this->pop();
+    }
+
+    if (i == this->length() - 1)
+    {
+        return this->popLast();
+    }
+
+    DNode<T>* node = this->head;
+
+    for (size_t j = 0; j < i ; ++j)
+    {
+        node = node->next;
+    }
+
+    node->previous->next = node->next;
+    node->next->previous = node->previous;
+    node->previous = nullptr;
+    node->next = nullptr;
+
+    this->len--;
+
+    return &(node->value);
+}
+
+template<typename T>
+void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
+{
+    if (i < 0 || i > this->length())
     {
         throw "Index out of range";
     }
@@ -195,7 +231,7 @@ void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
         return;
     }
 
-    if (i == this->length() - 1)
+    if (i == this->length())
     {
         this->pushBack(elem);
         return;
@@ -206,14 +242,9 @@ void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
     for (size_t j = 0; j < i ; ++j)
     {
         node = node->next;
-
     }
-    std::cout << "####0" << std::endl;
-    std::cout << node->value << std::endl;
-    std::cout << "####0" << std::endl;
 
     DNode<T>* newNode = new DNode(elem);
-
     newNode->next = node;
     newNode->previous = node->previous;
     node->previous->next = newNode;

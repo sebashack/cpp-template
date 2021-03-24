@@ -31,8 +31,13 @@ int main()
     //std::cout << ls.getAt(3) << std::endl;
 
     ls.insertAt(p3, 1);
+    std::cout << *(ls.removeAt(1)) << std::endl;
     ls.insertAt(p3, 3);
+    std::cout << *(ls.removeAt(3)) << std::endl;
     ls.insertAt(p0, 4);
+    std::cout << *(ls.removeAt(4)) << std::endl;
+
+    std::cout << "####" << std::endl;
 
     for (Person p : ls)
     {
