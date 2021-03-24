@@ -19,20 +19,25 @@ int main()
 
     std::cout << ls.length() << std::endl;
 
-    for (auto it = ls.begin(), end = ls.end(); it != end; ++it)
-    {
-        std::cout << *it << std::endl;
-    }
+    //for (auto it = ls.begin(), end = ls.end(); it != end; ++it)
+    //{
+    //    std::cout << *it << std::endl;
+    //}
 
-    for (Person p : ls)
-    {
-        std::cout << p << std::endl;
-    }
+    //for (Person p : ls)
+    //{
+    //    std::cout << p << std::endl;
+    //}
 
-    std::cout << *(ls.pop()) << std::endl;
-    std::cout << *(ls.popLast()) << std::endl;
-    std::cout << *(ls.pop()) << std::endl;
-    std::cout << *(ls.popLast()) << std::endl;
+    std::cout << ls.getAt(0) << std::endl;
+    std::cout << ls.getAt(1) << std::endl;
+    std::cout << ls.getAt(2) << std::endl;
+    std::cout << ls.getAt(3) << std::endl;
+
+    //std::cout << *(ls.pop()) << std::endl;
+    //std::cout << *(ls.popLast()) << std::endl;
+    //std::cout << *(ls.pop()) << std::endl;
+    //std::cout << *(ls.popLast()) << std::endl;
 
     std::cout << ls.length() << std::endl;
 

@@ -23,6 +23,7 @@ public:
 
     void pushBack(T& elem);
     void push(T& elem);
+    T& getAt(size_t i);
     T* pop();
     T* popLast();
     size_t length();
@@ -177,6 +178,24 @@ T* DoubleLinkedList<T>::popLast()
 
         return value;
     }
+}
+
+template<typename T>
+T& DoubleLinkedList<T>::getAt(size_t i)
+{
+    if (i < 0 || i >= this->length())
+    {
+        throw "Index out of range";
+    }
+
+    Iterator it = this->begin();
+
+    for (size_t j = 0; j < i ; ++j)
+    {
+        ++it;
+    }
+
+    return *(it);
 }
 
 template<typename T>
