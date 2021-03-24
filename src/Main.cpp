@@ -1,10 +1,11 @@
 // #include "Bar.cpp"
 #include "LinkedList.h"
+#include "DoubleLinkedList.h"
 #include "Person.h"
 
 int main()
 {
-    LinkedList<Person> ls;
+    DoubleLinkedList<Person> ls;
 
     Person p0("Sebastian", 1.81, 68.0);
     Person p1("Marco", 1.81, 68.0);
