@@ -37,6 +37,8 @@ int main()
     ls.insertAt(p0, 4);
     std::cout << *(ls.removeAt(4)) << std::endl;
 
+    ls.getMutAt(0)->update(p3);
+
     std::cout << "####" << std::endl;
 
     for (Person p : ls)

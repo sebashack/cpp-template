@@ -12,7 +12,15 @@ public:
     T& value;
     DNode<T>* next = nullptr;
     DNode<T>* previous = nullptr;
+
+    void update(T& v);
 };
+
+template<typename T>
+void DNode<T>::update(T& v)
+{
+    this->value = v;
+}
 
 template<typename T>
 class DoubleLinkedList
@@ -23,6 +31,7 @@ public:
 
     void pushBack(T& elem);
     void push(T& elem);
+    DNode<T>* getMutAt(size_t i);
     T& getAt(size_t i) const;
     void insertAt(T& elem, size_t i);
     T* removeAt(size_t i);
@@ -251,6 +260,24 @@ void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
     node->previous = newNode;
 
     this->len++;
+}
+
+template<typename T>
+DNode<T>* DoubleLinkedList<T>::getMutAt(size_t i)
+{
+    if (i < 0 || i >= this->length())
+    {
+        throw "Index out of range";
+    }
+
+    DNode<T>* node = this->head;
+
+    for (size_t j = 0; j < i ; ++j)
+    {
+        node = node->next;
+    }
+
+    return node;
 }
 
 template<typename T>
