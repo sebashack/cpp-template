@@ -23,11 +23,12 @@ public:
 
     void pushBack(T& elem);
     void push(T& elem);
-    T& getAt(size_t i);
+    T& getAt(size_t i) const;
+    void insertAt(T& elem, size_t i);
     T* pop();
     T* popLast();
-    size_t length();
-    bool isEmpty();
+    size_t length() const;
+    bool isEmpty() const;
 
     struct Iterator
     {
@@ -181,7 +182,48 @@ T* DoubleLinkedList<T>::popLast()
 }
 
 template<typename T>
-T& DoubleLinkedList<T>::getAt(size_t i)
+void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
+{
+    if (i < 0 || i >= this->length())
+    {
+        throw "Index out of range";
+    }
+
+    if (i == 0)
+    {
+        this->push(elem);
+        return;
+    }
+
+    if (i == this->length() - 1)
+    {
+        this->pushBack(elem);
+        return;
+    }
+
+    DNode<T>* node = this->head;
+
+    for (size_t j = 0; j < i ; ++j)
+    {
+        node = node->next;
+
+    }
+    std::cout << "####0" << std::endl;
+    std::cout << node->value << std::endl;
+    std::cout << "####0" << std::endl;
+
+    DNode<T>* newNode = new DNode(elem);
+
+    newNode->next = node;
+    newNode->previous = node->previous;
+    node->previous->next = newNode;
+    node->previous = newNode;
+
+    this->len++;
+}
+
+template<typename T>
+T& DoubleLinkedList<T>::getAt(size_t i) const
 {
     if (i < 0 || i >= this->length())
     {
@@ -227,13 +269,13 @@ T* DoubleLinkedList<T>::pop()
 }
 
 template<typename T>
-size_t DoubleLinkedList<T>::length()
+size_t DoubleLinkedList<T>::length() const
 {
     return this->len;
 }
 
 template<typename T>
-bool DoubleLinkedList<T>::isEmpty()
+bool DoubleLinkedList<T>::isEmpty() const
 {
     if (this->head == nullptr)
     {

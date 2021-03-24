@@ -24,15 +24,20 @@ int main()
     //    std::cout << *it << std::endl;
     //}
 
-    //for (Person p : ls)
-    //{
-    //    std::cout << p << std::endl;
-    //}
 
-    std::cout << ls.getAt(0) << std::endl;
-    std::cout << ls.getAt(1) << std::endl;
-    std::cout << ls.getAt(2) << std::endl;
-    std::cout << ls.getAt(3) << std::endl;
+    //std::cout << ls.getAt(0) << std::endl;
+    //std::cout << ls.getAt(1) << std::endl;
+    //std::cout << ls.getAt(2) << std::endl;
+    //std::cout << ls.getAt(3) << std::endl;
+
+    ls.insertAt(p3, 1);
+    ls.insertAt(p3, 3);
+    ls.insertAt(p0, 4);
+
+    for (Person p : ls)
+    {
+        std::cout << p << std::endl;
+    }
 
     //std::cout << *(ls.pop()) << std::endl;
     //std::cout << *(ls.popLast()) << std::endl;
