@@ -17,11 +17,6 @@ int main()
     ls.pushBack(p2);
     ls.pushBack(p3);
 
-    ls.push(p0);
-    ls.push(p1);
-    ls.push(p2);
-    ls.push(p3);
-
     std::cout << ls.length() << std::endl;
 
     for (auto it = ls.begin(), end = ls.end(); it != end; ++it)
@@ -34,14 +29,10 @@ int main()
         std::cout << p << std::endl;
     }
 
-    ls.pop();
-    ls.pop();
-    ls.pop();
-    ls.pop();
-    ls.pop();
-    ls.pop();
-    ls.pop();
-    ls.pop();
+    std::cout << *(ls.pop()) << std::endl;
+    std::cout << *(ls.popLast()) << std::endl;
+    std::cout << *(ls.pop()) << std::endl;
+    std::cout << *(ls.popLast()) << std::endl;
 
     std::cout << ls.length() << std::endl;
 

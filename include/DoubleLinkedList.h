@@ -24,6 +24,7 @@ public:
     void pushBack(T& elem);
     void push(T& elem);
     T* pop();
+    T* popLast();
     size_t length();
     bool isEmpty();
 
@@ -147,6 +148,35 @@ void DoubleLinkedList<T>::push(T& elem)
     }
 
     this->len++;
+}
+
+template<typename T>
+T* DoubleLinkedList<T>::popLast()
+{
+    if (this->tail == nullptr)
+    {
+        return nullptr;
+    }
+    else
+    {
+        T* value = &(this->tail->value);
+
+        if (this->head == this->tail)
+        {
+            this->head = nullptr;
+            this->tail = nullptr;
+
+        }
+        else
+        {
+            this->tail = this->tail->previous;
+            this->tail->next = nullptr;
+        }
+
+        this->len--;
+
+        return value;
+    }
 }
 
 template<typename T>
