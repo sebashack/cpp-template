@@ -34,6 +34,7 @@ public:
     DNode<T>* getMutAt(size_t i);
     T& getAt(size_t i) const;
     void insertAt(T& elem, size_t i);
+    void insertSorted(T& elem);
     T* removeAt(size_t i);
     T* pop();
     T* popLast();
@@ -156,6 +157,7 @@ void DoubleLinkedList<T>::push(T& elem)
     else
     {
         newNode->next = this->head;
+        this->head->previous = newNode;
         this->head = newNode;
     }
 
@@ -260,6 +262,39 @@ void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
     node->previous = newNode;
 
     this->len++;
+}
+
+template<typename T>
+void DoubleLinkedList<T>::insertSorted(T& elem)
+{
+    if (this->len < 1 || elem < this->head->value)
+    {
+        this->push(elem);
+        return;
+    }
+
+    DNode<T>* newNode = new DNode(elem);
+    DNode<T>* node = this->head->next;
+
+    while (node != nullptr)
+    {
+        if (elem < node->value)
+        {
+
+            newNode->next = node;
+            newNode->previous = node->previous;
+            node->previous->next = newNode;
+            node->previous = newNode;
+
+            this->len++;
+
+            return;
+        }
+
+        node = node->next;
+    }
+
+    this->pushBack(elem);
 }
 
 template<typename T>
