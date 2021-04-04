@@ -16,7 +16,7 @@ public:
     Token() = default;
     ~Token();
 
-
+    bool operator<(const Token& tk) const;
     friend std::ostream& operator<< (std::ostream& o, Token const& tk);
 
 private:

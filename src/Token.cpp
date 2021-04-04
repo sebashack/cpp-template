@@ -38,3 +38,8 @@ std::ostream& operator<< (std::ostream& o, Token const& tk)
 {
     return o << "Token(" << tk.value << ", " << tk.type << ")";
 }
+
+bool Token::operator<(const Token& other) const
+{
+    return this->type < other.type;
+}
