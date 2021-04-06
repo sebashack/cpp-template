@@ -23,3 +23,13 @@ make restyle
 ```
 make clean
 ```
+
+## Executable binary
+
+The executable binary is in the `dist` directory on the root of this project:
+
+Execute:
+
+```
+./dist/main
+```
