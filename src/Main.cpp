@@ -1,6 +1,5 @@
 #include "DoubleLinkedList.h"
 #include "Token.h"
-#include "AST.h"
 
 int main()
 {
