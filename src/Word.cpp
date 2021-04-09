@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
 
 #include "Word.h"
+#include "DoubleLinkedList.h"
 
 std::ostream& operator<< (std::ostream& o, word_type const& tt)
 {
@@ -22,20 +24,52 @@ std::ostream& operator<< (std::ostream& o, word_type const& tt)
     return o << rep;
 }
 
-Word::Word(std::string value, word_type type)
+Word::Word(std::string value, word_type type, ushort frequency)
 {
     this->value = value;
     this->type = type;
+    this->frequency = frequency;
 }
 
 Word::~Word() {}
 
-std::ostream& operator<< (std::ostream& o, Word const& tk)
+std::ostream& operator<< (std::ostream& o, Word const& w)
 {
-    return o << "Word(" << tk.value << ", " << tk.type << ")";
+    return o << "Word(" << w.value << ", " << w.type << ", " << w.frequency << ")";
 }
 
 bool Word::operator<(const Word& other) const
 {
     return this->type < other.type;
+}
+
+void Word::increaseFrequency()
+{
+    this->frequency++;
+}
+
+bool readWords(std::string filename, DoubleLinkedList<Word>& words)
+{
+    std::ifstream in(filename.c_str());
+
+    if(!in)
+    {
+        std::cerr << "Cannot open the File : " << filename << std::endl;
+        return false;
+    }
+
+    std::string line;
+
+    while (std::getline(in, line))
+    {
+        if(line.size() > 0)
+        {
+            Word w(line, Subject, 1);
+            words.pushBack(w);
+        }
+    }
+
+    in.close();
+
+    return true;
 }
