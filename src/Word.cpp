@@ -69,7 +69,7 @@ bool readWords(std::string filename, DoubleLinkedList<Word>& words)
             std::string word = line.substr(line.find(delimiter) + 1, line.length());
 
             Word w(word, charToWordType(type.front()), 1);
-            words.pushBack(w);
+            words.insertSorted(w);
         }
     }
 
