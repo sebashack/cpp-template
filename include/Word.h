@@ -30,5 +30,6 @@ public:
 private:
 };
 
-
 bool readWords(std::string filename, DoubleLinkedList<Word>& words);
+
+word_type charToWordType(char c);

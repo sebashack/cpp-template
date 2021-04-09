@@ -64,7 +64,11 @@ bool readWords(std::string filename, DoubleLinkedList<Word>& words)
     {
         if(line.size() > 0)
         {
-            Word w(line, Subject, 1);
+            std::string delimiter = ":";
+            std::string type = line.substr(0, line.find(delimiter));
+            std::string word = line.substr(line.find(delimiter) + 1, line.length());
+
+            Word w(word, charToWordType(type.front()), 1);
             words.pushBack(w);
         }
     }
@@ -72,4 +76,24 @@ bool readWords(std::string filename, DoubleLinkedList<Word>& words)
     in.close();
 
     return true;
+}
+
+word_type charToWordType(char c)
+{
+    word_type type;
+
+    switch(c)
+    {
+    case 's':
+        type = Subject;
+        break;
+    case 'v':
+        type = Verb;
+        break;
+    case 'p':
+        type = Predicate;
+        break;
+    }
+
+    return type;
 }
