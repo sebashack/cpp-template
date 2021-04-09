@@ -3,7 +3,7 @@ BIN_NAME:=main
 INCLUDES_DIR:=${CURDIR}/include
 SOURCE_DIR:=${CURDIR}/src
 
-SOURCES:=${SOURCE_DIR}/Main.cpp ${SOURCE_DIR}/Token.cpp
+SOURCES:=${SOURCE_DIR}/Main.cpp ${SOURCE_DIR}/Word.cpp
 OBJECTS:=$(patsubst %.cpp,%.o,$(SOURCES))
 
 ${OBJECTS}:

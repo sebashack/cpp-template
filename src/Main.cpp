@@ -1,21 +1,19 @@
 #include "DoubleLinkedList.h"
-#include "Token.h"
+#include "Word.h"
 
 int main()
 {
-    DoubleLinkedList<Token> ls;
+    DoubleLinkedList<Word> ls;
 
-    Token tk0("foo", D);
-    Token tk1("bar", B);
-    Token tk2("dood", A);
-    Token tk3("duh", C);
+    Word tk0("foo", Subject);
+    Word tk1("bar", Verb);
+    Word tk2("dood", Predicate);
 
     ls.insertSorted(tk0);
     ls.insertSorted(tk1);
     ls.insertSorted(tk2);
-    ls.insertSorted(tk3);
 
-    for (Token tk : ls)
+    for (Word tk : ls)
     {
         std::cout << tk << std::endl;
     }
