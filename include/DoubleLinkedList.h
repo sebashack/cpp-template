@@ -7,9 +7,9 @@ template<typename T>
 class DNode
 {
 public:
-    DNode(T& v) : value(v) {}
+    DNode(T v) : value(v) {}
 
-    T& value;
+    T value;
     DNode<T>* next = nullptr;
     DNode<T>* previous = nullptr;
 
@@ -29,12 +29,12 @@ public:
     DoubleLinkedList();
     ~DoubleLinkedList();
 
-    void pushBack(T& elem);
-    void push(T& elem);
+    void pushBack(T elem);
+    void push(T elem);
     DNode<T>* getMutAt(size_t i);
     T& getAt(size_t i) const;
-    void insertAt(T& elem, size_t i);
-    void insertSorted(T& elem);
+    void insertAt(T elem, size_t i);
+    void insertSorted(T elem);
     T* removeAt(size_t i);
     T* pop();
     T* popLast();
@@ -125,7 +125,7 @@ DoubleLinkedList<T>::~DoubleLinkedList()
 }
 
 template<typename T>
-void DoubleLinkedList<T>::pushBack(T& elem)
+void DoubleLinkedList<T>::pushBack(T elem)
 {
     DNode<T>* newNode = new DNode(elem);
 
@@ -145,7 +145,7 @@ void DoubleLinkedList<T>::pushBack(T& elem)
 }
 
 template<typename T>
-void DoubleLinkedList<T>::push(T& elem)
+void DoubleLinkedList<T>::push(T elem)
 {
     DNode<T>* newNode = new DNode(elem);
 
@@ -229,7 +229,7 @@ T* DoubleLinkedList<T>::removeAt(size_t i)
 }
 
 template<typename T>
-void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
+void DoubleLinkedList<T>::insertAt(T elem, size_t i)
 {
     if (i < 0 || i > this->length())
     {
@@ -265,7 +265,7 @@ void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
 }
 
 template<typename T>
-void DoubleLinkedList<T>::insertSorted(T& elem)
+void DoubleLinkedList<T>::insertSorted(T elem)
 {
     if (this->len < 1 || elem < this->head->value)
     {
