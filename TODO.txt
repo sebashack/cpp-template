@@ -1,7 +1,0 @@
-- Implement iterator for LinkedList.
-- Implement printing for person.
-- Possibly implement sorting
-- Implement double-linked lists + iterators.
-- Implement post_order, in_order insertions.
-- Implement AST trees.
-- Implement AST in Haskell.
