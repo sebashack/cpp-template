@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <iostream>
+#include <time.h>
 
 template<typename T>
 class DNode
@@ -36,6 +37,7 @@ public:
     void insertAt(T elem, size_t i);
     void insertSorted(T elem);
     void swapValues(size_t i, size_t j);
+    void shuffle();
     T* removeAt(size_t i);
     T* pop();
     T* popLast();
@@ -314,6 +316,25 @@ void DoubleLinkedList<T>::swapValues(size_t i, size_t j)
 
     nodei->update(valAtJ);
     nodej->update(valAtI);
+}
+
+template<typename T>
+void DoubleLinkedList<T>::shuffle()
+{
+    std::srand(time(0));
+
+    size_t min = 0;
+    size_t max = this->length() - 1;
+    size_t l;
+    size_t u;
+
+    for (size_t i = 0; i < this->length(); ++i)
+    {
+        l = min + std::rand() % (max - min + 1);
+        u = min + std::rand() % (max - min + 1);
+
+        this->swapValues(l, u);
+    }
 }
 
 template<typename T>
