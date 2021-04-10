@@ -122,8 +122,6 @@ DoubleLinkedList<T>::~DoubleLinkedList()
             delete nextNode;
             nextNode = tmp;
         }
-
-        std::cout << "DoubleLinkedList object destroyed" << std::endl;
     }
 }
 
