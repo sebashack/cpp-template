@@ -1,5 +1,6 @@
-#include <iostream>
+#include <cmath>
 #include <fstream>
+#include <iostream>
 
 #include "Word.h"
 #include "DoubleLinkedList.h"
@@ -48,6 +49,18 @@ void Word::increaseFrequency()
     this->frequency++;
 }
 
+void Word::printWordInSentence()
+{
+    if (this->type == Predicate)
+    {
+        std::cout << this->value << "." << std::endl;
+    }
+    else
+    {
+        std::cout << this->value << " ";
+    }
+}
+
 std::map<word_type, size_t> readWords(std::string filename, DoubleLinkedList<Word>& words)
 {
     std::ifstream in(filename.c_str());
@@ -67,7 +80,6 @@ std::map<word_type, size_t> readWords(std::string filename, DoubleLinkedList<Wor
         { Predicate, 0 }
     };
 
-    const short MAX_WORDS = 30;
     short i = 0;
 
     while (std::getline(in, line) && i <= MAX_WORDS)
@@ -128,4 +140,35 @@ word_type charToWordType(char c)
     }
 
     return type;
+}
+
+void processWord(DoubleLinkedList<Word> &words, word_count& count, word_type type)
+{
+    if (words.length() > 0)
+    {
+        size_t min = 0;
+        size_t max = words.length() - 1;
+        size_t r = min + std::rand() % (max - min + 1);
+
+        intmax_t wordIndex = searchByType(type, words);
+
+
+        if (count[type] > 0 && wordIndex > -1)
+        {
+            Word& word = words.getAt(wordIndex);
+            short maxWordFreq = round(MAX_WORDS / count[type]);
+
+            word.printWordInSentence();
+            word.increaseFrequency();
+
+            if (word.frequency > maxWordFreq)
+            {
+                words.removeAt(wordIndex);
+            }
+            else
+            {
+                words.swapValues(r, wordIndex);
+            }
+        }
+    }
 }

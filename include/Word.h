@@ -7,6 +7,8 @@
 
 #include "DoubleLinkedList.h"
 
+#define MAX_WORDS 30
+
 enum word_type { Subject, Verb, Predicate };
 
 std::ostream& operator<< (std::ostream& o, word_type const& tt);
@@ -26,6 +28,7 @@ public:
     ~Word();
 
     void increaseFrequency();
+    void printWordInSentence();
 
     bool operator<(const Word& tk) const;
     friend std::ostream& operator<< (std::ostream& o, Word const& tk);
@@ -36,3 +39,4 @@ private:
 word_count readWords(std::string filename, DoubleLinkedList<Word>& words);
 intmax_t searchByType(word_type type, DoubleLinkedList<Word>& words);
 word_type charToWordType(char c);
+void processWord(DoubleLinkedList<Word> &words, word_count& count, word_type type);
