@@ -35,6 +35,7 @@ public:
     T& getAt(size_t i) const;
     void insertAt(T elem, size_t i);
     void insertSorted(T elem);
+    void swapValues(size_t i, size_t j);
     T* removeAt(size_t i);
     T* pop();
     T* popLast();
@@ -295,6 +296,24 @@ void DoubleLinkedList<T>::insertSorted(T elem)
     }
 
     this->pushBack(elem);
+}
+
+template<typename T>
+void DoubleLinkedList<T>::swapValues(size_t i, size_t j)
+{
+    if (i < 0 || j < 0|| i >= this->length() || j >= this->length())
+    {
+        throw "Index out of range";
+    }
+
+    DNode<T>* nodei = this->getMutAt(i);
+    DNode<T>* nodej = this->getMutAt(j);
+
+    T valAtI = nodei->value;
+    T valAtJ = nodej->value;
+
+    nodei->update(valAtJ);
+    nodej->update(valAtI);
 }
 
 template<typename T>
