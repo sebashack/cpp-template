@@ -48,34 +48,49 @@ void Word::increaseFrequency()
     this->frequency++;
 }
 
-bool readWords(std::string filename, DoubleLinkedList<Word>& words)
+std::map<word_type, size_t> readWords(std::string filename, DoubleLinkedList<Word>& words)
 {
     std::ifstream in(filename.c_str());
 
     if(!in)
     {
         std::cerr << "Cannot open the File : " << filename << std::endl;
-        return false;
+        throw "File error";
     }
 
     std::string line;
 
-    while (std::getline(in, line))
+    word_count count =
+    {
+        { Subject, 0 },
+        { Verb, 0 },
+        { Predicate, 0 }
+    };
+
+    const short MAX_WORDS = 30;
+    short i = 0;
+
+    while (std::getline(in, line) && i <= MAX_WORDS)
     {
         if(line.size() > 0)
         {
             std::string delimiter = ":";
-            std::string type = line.substr(0, line.find(delimiter));
+            std::string charType = line.substr(0, line.find(delimiter));
             std::string word = line.substr(line.find(delimiter) + 1, line.length());
 
-            Word w(word, charToWordType(type.front()), 1);
+            word_type type = charToWordType(charType.front());
+            count[type]++;
+
+            Word w(word, type, 1);
             words.insertSorted(w);
         }
+
+        ++i;
     }
 
     in.close();
 
-    return true;
+    return count;
 }
 
 intmax_t searchByType(word_type type, DoubleLinkedList<Word>& words)

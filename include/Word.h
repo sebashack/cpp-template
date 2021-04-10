@@ -1,7 +1,9 @@
 #pragma once
+
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <map>
 
 #include "DoubleLinkedList.h"
 
@@ -10,6 +12,7 @@ enum word_type { Subject, Verb, Predicate };
 std::ostream& operator<< (std::ostream& o, word_type const& tt);
 
 using ushort = unsigned short int;
+using word_count = std::map<word_type, size_t>;
 
 class Word
 {
@@ -30,6 +33,6 @@ public:
 private:
 };
 
-bool readWords(std::string filename, DoubleLinkedList<Word>& words);
+word_count readWords(std::string filename, DoubleLinkedList<Word>& words);
 intmax_t searchByType(word_type type, DoubleLinkedList<Word>& words);
 word_type charToWordType(char c);
