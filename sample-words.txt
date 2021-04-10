@@ -1,0 +1,30 @@
+v:corre
+p:mucho
+p:sensualmente
+s:el peleador
+s:el caballo
+s:el piloto
+s:el moreno
+v:come
+s:la mujer
+p:con destreza
+s:ella
+p:basura
+s:el poeta
+v:camina
+s:el
+v:estudia
+s:el insecto
+v:es
+v:es
+v:es
+p:orgullosa
+p:perfecta
+p:elegantemente
+p:alto
+p:feliz
+p:descontroladamente
+s:la dama
+v:baila
+v:maneja
+v:golpea
