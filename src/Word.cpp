@@ -78,6 +78,23 @@ bool readWords(std::string filename, DoubleLinkedList<Word>& words)
     return true;
 }
 
+intmax_t searchByType(word_type type, DoubleLinkedList<Word>& words)
+{
+    size_t i = 0;
+
+    for (Word w : words)
+    {
+        if (w.type == type)
+        {
+            return i;
+        }
+
+        ++i;
+    }
+
+    return -1;
+}
+
 word_type charToWordType(char c)
 {
     word_type type;
