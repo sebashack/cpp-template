@@ -32,8 +32,8 @@ public:
 
     void pushBack(T elem);
     void push(T elem);
-    DNode<T>* getMutAt(size_t i);
-    T& getAt(size_t i) const;
+    DNode<T>* getPtrAt(size_t i);
+    T& getAt(size_t i);
     void insertAt(T elem, size_t i);
     void insertSorted(T elem);
     void swapValues(size_t i, size_t j);
@@ -306,8 +306,8 @@ void DoubleLinkedList<T>::swapValues(size_t i, size_t j)
         throw "Index out of range";
     }
 
-    DNode<T>* nodei = this->getMutAt(i);
-    DNode<T>* nodej = this->getMutAt(j);
+    DNode<T>* nodei = this->getPtrAt(i);
+    DNode<T>* nodej = this->getPtrAt(j);
 
     T valAtI = nodei->value;
     T valAtJ = nodej->value;
@@ -336,7 +336,7 @@ void DoubleLinkedList<T>::shuffle()
 }
 
 template<typename T>
-DNode<T>* DoubleLinkedList<T>::getMutAt(size_t i)
+DNode<T>* DoubleLinkedList<T>::getPtrAt(size_t i)
 {
     if (i < 0 || i >= this->length())
     {
@@ -354,7 +354,7 @@ DNode<T>* DoubleLinkedList<T>::getMutAt(size_t i)
 }
 
 template<typename T>
-T& DoubleLinkedList<T>::getAt(size_t i) const
+T& DoubleLinkedList<T>::getAt(size_t i)
 {
     if (i < 0 || i >= this->length())
     {
