@@ -42,6 +42,16 @@ void Words::readWords()
     in.close();
 }
 
+void Words::reset()
+{
+    DoubleLinkedList<Word> empty;
+
+    this->words = empty;
+    this->wCount = { { Subject, 0 }, { Verb, 0 }, { Predicate, 0 } };
+    this->removalCount = { { Subject, 0 }, { Verb, 0 }, { Predicate, 0 } };
+    this->readWords();
+}
+
 void Words::shuffle()
 {
     this->words.shuffle();

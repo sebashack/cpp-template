@@ -15,6 +15,7 @@ public:
     intmax_t searchByType(word_type type);
     size_t length();
     void readWords();
+    void reset();
     void shuffle();
     void useWordType(word_type type);
 

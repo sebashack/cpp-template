@@ -9,8 +9,10 @@ Generator::~Generator() {}
 Generator::Generator(std::string path)
 {
     Words words(path);
+
     this->words = words;
     this->words.readWords();
+    this->words.shuffle();
 }
 
 void Generator::printSentences()
@@ -36,4 +38,7 @@ void Generator::printSentences()
 
         ++generatedSentences;
     }
+
+    this->words.reset();
+    this->words.shuffle();
 }
