@@ -1,6 +1,4 @@
-#include "DoubleLinkedList.h"
-#include "Word.h"
-#include "Words.h"
+#include "Generator.h"
 
 
 int main(int argc, char* argv[])
@@ -12,31 +10,9 @@ int main(int argc, char* argv[])
     }
 
     std::string filepath = argv[1];
-    Words words(filepath);
+    Generator gen(filepath);
 
-    words.readWords();
-
-    short generatedSentences = 0;
-
-    words.shuffle();
-
-    while (generatedSentences < MAX_WORDS && words.length() > 0)
-    {
-        if (generatedSentences < 9)
-        {
-            std::cout << 0 << generatedSentences + 1 << "| ";
-        }
-        else
-        {
-            std::cout << generatedSentences + 1 << "| ";
-        }
-
-        words.useWordType(Subject);
-        words.useWordType(Verb);
-        words.useWordType(Predicate);
-
-        ++generatedSentences;
-    }
+    gen.printSentences();
 
     return 0;
 }

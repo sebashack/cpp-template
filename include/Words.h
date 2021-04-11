@@ -1,7 +1,14 @@
+#pragma once
+
+#include <string>
+
+#include "Word.h"
+
 class Words
 {
 public:
-    Words(std::string filepath) : dictpath(filepath) {};
+    Words(std::string path) : dictpath(path) {};
+    Words() = default;
     ~Words();
 
     intmax_t searchByType(word_type type);

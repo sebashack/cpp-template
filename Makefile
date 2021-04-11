@@ -3,7 +3,7 @@ BIN_NAME:=main
 INCLUDES_DIR:=${CURDIR}/include
 SOURCE_DIR:=${CURDIR}/src
 
-SOURCES:=${SOURCE_DIR}/Main.cpp ${SOURCE_DIR}/Word.cpp ${SOURCE_DIR}/Words.cpp
+SOURCES:=${SOURCE_DIR}/Main.cpp ${SOURCE_DIR}/Word.cpp ${SOURCE_DIR}/Words.cpp ${SOURCE_DIR}/Generator.cpp
 OBJECTS:=$(patsubst %.cpp,%.o,$(SOURCES))
 
 ${OBJECTS}:
