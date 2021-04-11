@@ -4,7 +4,6 @@
 
 #include "Word.h"
 #include "Words.h"
-#include "DoubleLinkedList.h"
 
 Words::~Words() {}
 

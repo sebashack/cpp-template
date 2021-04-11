@@ -1,9 +1,7 @@
 #include <cmath>
-#include <fstream>
 #include <iostream>
 
 #include "Word.h"
-#include "DoubleLinkedList.h"
 
 std::ostream& operator<< (std::ostream& o, word_type const& tt)
 {
@@ -61,65 +59,19 @@ void Word::printWordInSentence()
     }
 }
 
-std::map<word_type, size_t> readWords(std::string filename, DoubleLinkedList<Word>& words)
+std::tuple<word_type, word_type> pickOutWordType(word_count& count, word_type type0, word_type type1)
 {
-    std::ifstream in(filename.c_str());
+    size_t c0 = count[type0];
+    size_t c1 = count[type1];
 
-    if(in.peek() < 0)
+    if (c0 >= c1)
     {
-        std::cerr << "WARNING!: Cannot open the File `" << filename << "`" << std::endl;
-        exit (EXIT_FAILURE);
+        return std::make_tuple(type0, type1);
     }
-
-    std::string line;
-
-    word_count count =
+    else
     {
-        { Subject, 0 },
-        { Verb, 0 },
-        { Predicate, 0 }
-    };
-
-    short i = 0;
-
-    while (std::getline(in, line) && i <= MAX_WORDS)
-    {
-        if(line.size() > 0)
-        {
-            std::string delimiter = ":";
-            std::string charType = line.substr(0, line.find(delimiter));
-            std::string word = line.substr(line.find(delimiter) + 1, line.length());
-
-            word_type type = charToWordType(charType.front());
-            count[type]++;
-
-            Word w(word, type);
-            words.insertSorted(w);
-        }
-
-        ++i;
+        return std::make_tuple(type1, type0);
     }
-
-    in.close();
-
-    return count;
-}
-
-intmax_t searchByType(word_type type, DoubleLinkedList<Word>& words)
-{
-    size_t i = 0;
-
-    for (Word w : words)
-    {
-        if (w.type == type)
-        {
-            return i;
-        }
-
-        ++i;
-    }
-
-    return -1;
 }
 
 word_type charToWordType(char c)
@@ -140,74 +92,4 @@ word_type charToWordType(char c)
     }
 
     return type;
-}
-
-std::tuple<word_type, word_type> pickOutWordType(word_count& count, word_type type0, word_type type1)
-{
-    size_t c0 = count[type0];
-    size_t c1 = count[type1];
-
-    if (c0 >= c1)
-    {
-        return std::make_tuple(type0, type1);
-    }
-    else
-    {
-        return std::make_tuple(type1, type0);
-    }
-}
-
-void useWordType(DoubleLinkedList<Word> &words, word_count& count, word_count& removalCount, word_type type)
-{
-    while (words.length() > 0)
-    {
-        intmax_t wordIndex = searchByType(type, words);
-
-        if (count[type] > 0 && wordIndex > -1)
-        {
-            Word& word = words.getAt(wordIndex);
-            short maxWordFreq;
-
-            if (count[type] >= CEILING_THRESHOLD)
-            {
-                maxWordFreq = ceil(static_cast<float>(MAX_WORDS) / count[type]);
-            }
-            else
-            {
-                maxWordFreq = round(static_cast<float>(MAX_WORDS) / count[type]);
-            }
-
-            // Edge case when we are running out of a type of word.
-            // This happens, for example, if we have a list with 28 subjects,
-            // 1 verb and 1 predicate. In that case it is impossible to generate 30
-            // different sentences so duplcation is allowed there.
-            if (removalCount[type] == 1)
-            {
-                word.printWordInSentence();
-                break;
-            }
-
-            if (word.frequency >= maxWordFreq)
-            {
-                words.removeAt(wordIndex);
-                --removalCount[type];
-            }
-            else
-            {
-                word.printWordInSentence();
-                word.increaseFrequency();
-
-                std::tuple<word_type, word_type> t0 = pickOutWordType(count, Subject, Predicate);
-                std::tuple<word_type, word_type> t1 = pickOutWordType(count, Verb, std::get<1>(t0));
-
-                if (type == std::get<0>(t0) || type == std::get<0>(t1))
-                {
-                    Word* word = words.removeAt(wordIndex);
-                    words.pushBack(*word);
-                }
-
-                break;
-            }
-        }
-    }
 }

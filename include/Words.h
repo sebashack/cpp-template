@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Word.h"
+#include "DoubleLinkedList.h"
 
 class Words
 {
