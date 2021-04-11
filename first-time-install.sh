@@ -3,5 +3,4 @@
 set -xeuf -o pipefail
 
 sudo apt update
-sudo apt install astyle
-sudo apt install build-essential
+sudo apt install astyle build-essential
