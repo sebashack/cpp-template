@@ -1,14 +1,19 @@
-#include <time.h>
-
 #include "DoubleLinkedList.h"
 #include "Word.h"
 
 
-int main()
+int main(int argc, char* argv[])
 {
-    DoubleLinkedList<Word> words;
-    word_count count = readWords("/home/sebastian/university/programming_languages/cpp_template/sample-words.txt", words);
+    if (argc < 2)
+    {
+        std::cerr << "Usage: " << argv[0] << " WORDS_FILEPATH" << std::endl;
+        return 1;
+    }
 
+    std::string filePath = argv[1];
+
+    DoubleLinkedList<Word> words;
+    word_count count = readWords(filePath, words);
 
     short generatedSentences = 0;
     words.shuffle();

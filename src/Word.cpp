@@ -65,10 +65,10 @@ std::map<word_type, size_t> readWords(std::string filename, DoubleLinkedList<Wor
 {
     std::ifstream in(filename.c_str());
 
-    if(!in)
+    if(in.peek() < 0)
     {
-        std::cerr << "Cannot open the File : " << filename << std::endl;
-        throw "File error";
+        std::cerr << "WARNING!: Cannot open the File `" << filename << "`" << std::endl;
+        exit (EXIT_FAILURE);
     }
 
     std::string line;
