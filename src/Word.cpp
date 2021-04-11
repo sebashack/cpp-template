@@ -25,11 +25,10 @@ std::ostream& operator<< (std::ostream& o, word_type const& tt)
     return o << rep;
 }
 
-Word::Word(std::string value, word_type type, ushort frequency)
+Word::Word(std::string value, word_type type)
 {
     this->value = value;
     this->type = type;
-    this->frequency = frequency;
 }
 
 Word::~Word() {}
@@ -39,9 +38,10 @@ std::ostream& operator<< (std::ostream& o, Word const& w)
     return o << "Word(" << w.value << ", " << w.type << ", " << w.frequency << ")";
 }
 
+// Compare words by frequency
 bool Word::operator<(const Word& other) const
 {
-    return this->type < other.type;
+    return this->frequency < other.frequency;
 }
 
 void Word::increaseFrequency()
@@ -93,7 +93,7 @@ std::map<word_type, size_t> readWords(std::string filename, DoubleLinkedList<Wor
             word_type type = charToWordType(charType.front());
             count[type]++;
 
-            Word w(word, type, 1);
+            Word w(word, type);
             words.insertSorted(w);
         }
 
@@ -142,47 +142,71 @@ word_type charToWordType(char c)
     return type;
 }
 
-size_t getRanDifferentFrom(size_t k, size_t min, size_t max)
+std::tuple<word_type, word_type> pickOutWordType(word_count& count, word_type type0, word_type type1)
 {
-    if (max <= min)
-    {
-        return k;
-    }
+    size_t c0 = count[type0];
+    size_t c1 = count[type1];
 
-    size_t r;
-    do
+    if (c0 >= c1)
     {
-        r = min + std::rand() % (max - min + 1);
+        return std::make_tuple(type0, type1);
     }
-    while (r == k);
-
-    return r;
+    else
+    {
+        return std::make_tuple(type1, type0);
+    }
 }
 
-void processWord(DoubleLinkedList<Word> &words, word_count& count, word_type type)
+void useWordType(DoubleLinkedList<Word> &words, word_count& count, word_count& removalCount, word_type type)
 {
-    if (words.length() > 0)
+    while (words.length() > 0)
     {
         intmax_t wordIndex = searchByType(type, words);
 
         if (count[type] > 0 && wordIndex > -1)
         {
             Word& word = words.getAt(wordIndex);
-            short maxWordFreq = round(MAX_WORDS / count[type]);
+            short maxWordFreq;
 
-            word.printWordInSentence();
-            word.increaseFrequency();
-
-            if (word.frequency > maxWordFreq)
+            if (count[type] >= CEILING_THRESHOLD)
             {
-                words.removeAt(wordIndex);
+                maxWordFreq = ceil(static_cast<float>(MAX_WORDS) / count[type]);
             }
             else
             {
-                size_t min = 0;
-                size_t max = words.length() - 1;
-                size_t r = getRanDifferentFrom(wordIndex, min, max);
-                words.swapValues(r, wordIndex);
+                maxWordFreq = round(static_cast<float>(MAX_WORDS) / count[type]);
+            }
+
+            // Edge case when we are running out of a type of word.
+            // This happens, for example, if we have a list with 28 subjects,
+            // 1 verb and 1 predicate. In that case it is impossible to generate 30
+            // different sentences so duplcation is allowed there.
+            if (removalCount[type] == 1)
+            {
+                word.printWordInSentence();
+                break;
+            }
+
+            if (word.frequency >= maxWordFreq)
+            {
+                words.removeAt(wordIndex);
+                --removalCount[type];
+            }
+            else
+            {
+                word.printWordInSentence();
+                word.increaseFrequency();
+
+                std::tuple<word_type, word_type> t0 = pickOutWordType(count, Subject, Predicate);
+                std::tuple<word_type, word_type> t1 = pickOutWordType(count, Verb, std::get<1>(t0));
+
+                if (type == std::get<0>(t0) || type == std::get<0>(t1))
+                {
+                    Word* word = words.removeAt(wordIndex);
+                    words.pushBack(*word);
+                }
+
+                break;
             }
         }
     }

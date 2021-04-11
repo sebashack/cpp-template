@@ -14,16 +14,31 @@ int main(int argc, char* argv[])
 
     DoubleLinkedList<Word> words;
     word_count count = readWords(filePath, words);
+    word_count removalCount =
+    {
+        { Subject, count[Subject] },
+        { Verb, count[Verb] },
+        { Predicate, count[Predicate] }
+    };
 
     short generatedSentences = 0;
+
     words.shuffle();
 
-    while (generatedSentences <= MAX_WORDS && words.length() > 0)
+    while (generatedSentences < MAX_WORDS && words.length() > 0)
     {
-        std::cerr << generatedSentences + 1 << ") ";
-        processWord(words, count, Subject);
-        processWord(words, count, Verb);
-        processWord(words, count, Predicate);
+        if (generatedSentences < 9)
+        {
+            std::cout << 0 << generatedSentences + 1 << "| ";
+        }
+        else
+        {
+            std::cout << generatedSentences + 1 << "| ";
+        }
+
+        useWordType(words, count, removalCount, Subject);
+        useWordType(words, count, removalCount, Verb);
+        useWordType(words, count, removalCount, Predicate);
 
         ++generatedSentences;
     }
