@@ -142,16 +142,28 @@ word_type charToWordType(char c)
     return type;
 }
 
+size_t getRanDifferentFrom(size_t k, size_t min, size_t max)
+{
+    if (max <= min)
+    {
+        return k;
+    }
+
+    size_t r;
+    do
+    {
+        r = min + std::rand() % (max - min + 1);
+    }
+    while (r == k);
+
+    return r;
+}
+
 void processWord(DoubleLinkedList<Word> &words, word_count& count, word_type type)
 {
     if (words.length() > 0)
     {
-        size_t min = 0;
-        size_t max = words.length() - 1;
-        size_t r = min + std::rand() % (max - min + 1);
-
         intmax_t wordIndex = searchByType(type, words);
-
 
         if (count[type] > 0 && wordIndex > -1)
         {
@@ -167,6 +179,9 @@ void processWord(DoubleLinkedList<Word> &words, word_count& count, word_type typ
             }
             else
             {
+                size_t min = 0;
+                size_t max = words.length() - 1;
+                size_t r = getRanDifferentFrom(wordIndex, min, max);
                 words.swapValues(r, wordIndex);
             }
         }
