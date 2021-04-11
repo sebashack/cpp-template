@@ -1,0 +1,30 @@
+p:atentamente
+p:con cuidado
+p:con destreza
+p:con rigor
+p:con sorpresa
+p:descuidadamente
+p:esperanzadamente
+p:intensamente
+p:rapidamente
+p:tenuemente
+p:desesperadamente
+p:concientemente
+s:el perro
+s:la sirena
+s:el capitan
+s:el pirata
+v:confiesa
+v:expresa
+v:brilla
+v:construye
+v:observa
+v:responde
+v:trabaja
+v:transita
+v:piensa
+v:actua
+v:siente
+v:ordena
+v:desea
+v:golpea

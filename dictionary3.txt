@@ -1,0 +1,30 @@
+p:atentamente
+p:con cuidado
+s:el perro
+v:confiesa
+v:reza
+v:expresa
+v:baila
+v:brilla
+v:camina
+v:construye
+v:espera
+v:estudia
+v:juega
+v:observa
+v:responde
+v:salta
+v:trabaja
+v:viste
+v:mira
+v:transita
+v:piensa
+v:actua
+v:siente
+v:ordena
+v:desea
+v:golpea
+v:canta
+v:reclama
+v:rema
+v:vive

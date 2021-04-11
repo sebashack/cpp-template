@@ -1,0 +1,30 @@
+p:atentamente
+p:con cuidado
+p:con rigor
+p:con sorpresa
+p:descuidadamente
+p:esperanzadamente
+p:intensamente
+p:rapidamente
+p:tenuemente
+p:desesperadamente
+p:concientemente
+s:la sirena
+s:el caballo
+s:el gato
+s:el hombre
+s:el mulato
+s:el poeta
+s:ella
+s:el soldado
+s:la luna
+s:la mujer
+s:el oso
+v:baila
+v:vive
+v:golpea
+v:brilla
+v:camina
+v:expresa
+v:espera
+v:estudia
