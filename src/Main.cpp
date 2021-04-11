@@ -1,5 +1,6 @@
 #include "DoubleLinkedList.h"
 #include "Word.h"
+#include "Words.h"
 
 
 int main(int argc, char* argv[])
@@ -10,16 +11,10 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    std::string filePath = argv[1];
+    std::string filepath = argv[1];
+    Words words(filepath);
 
-    DoubleLinkedList<Word> words;
-    word_count count = readWords(filePath, words);
-    word_count removalCount =
-    {
-        { Subject, count[Subject] },
-        { Verb, count[Verb] },
-        { Predicate, count[Predicate] }
-    };
+    words.readWords();
 
     short generatedSentences = 0;
 
@@ -36,9 +31,9 @@ int main(int argc, char* argv[])
             std::cout << generatedSentences + 1 << "| ";
         }
 
-        useWordType(words, count, removalCount, Subject);
-        useWordType(words, count, removalCount, Verb);
-        useWordType(words, count, removalCount, Predicate);
+        words.useWordType(Subject);
+        words.useWordType(Verb);
+        words.useWordType(Predicate);
 
         ++generatedSentences;
     }

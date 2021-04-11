@@ -37,8 +37,9 @@ public:
 private:
 };
 
-word_count readWords(std::string filename, DoubleLinkedList<Word>& words);
-intmax_t searchByType(word_type type, DoubleLinkedList<Word>& words);
-word_type charToWordType(char c);
-void useWordType(DoubleLinkedList<Word> &words, word_count& count, word_count& usageCount,word_type type);
 std::tuple<word_type, word_type> pickOutWordType(word_count& count, word_type type0, word_type type1);
+word_type charToWordType(char c);
+
+intmax_t searchByType(word_type type, DoubleLinkedList<Word>& words);
+void useWordType(DoubleLinkedList<Word> &words, word_count& count, word_count& usageCount,word_type type);
+word_count readWords(std::string filename, DoubleLinkedList<Word>& words);
