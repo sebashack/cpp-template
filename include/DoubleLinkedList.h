@@ -2,14 +2,15 @@
 
 #include <cstddef>
 #include <iostream>
+#include <time.h>
 
 template<typename T>
 class DNode
 {
 public:
-    DNode(T& v) : value(v) {}
+    DNode(T v) : value(v) {}
 
-    T& value;
+    T value;
     DNode<T>* next = nullptr;
     DNode<T>* previous = nullptr;
 
@@ -29,12 +30,14 @@ public:
     DoubleLinkedList();
     ~DoubleLinkedList();
 
-    void pushBack(T& elem);
-    void push(T& elem);
-    DNode<T>* getMutAt(size_t i);
-    T& getAt(size_t i) const;
-    void insertAt(T& elem, size_t i);
-    void insertSorted(T& elem);
+    void pushBack(T elem);
+    void push(T elem);
+    DNode<T>* getPtrAt(size_t i);
+    T& getAt(size_t i);
+    void insertAt(T elem, size_t i);
+    void insertSorted(T elem);
+    void swapValues(size_t i, size_t j);
+    void shuffle();
     T* removeAt(size_t i);
     T* pop();
     T* popLast();
@@ -119,13 +122,11 @@ DoubleLinkedList<T>::~DoubleLinkedList()
             delete nextNode;
             nextNode = tmp;
         }
-
-        std::cout << "DoubleLinkedList object destroyed" << std::endl;
     }
 }
 
 template<typename T>
-void DoubleLinkedList<T>::pushBack(T& elem)
+void DoubleLinkedList<T>::pushBack(T elem)
 {
     DNode<T>* newNode = new DNode(elem);
 
@@ -145,7 +146,7 @@ void DoubleLinkedList<T>::pushBack(T& elem)
 }
 
 template<typename T>
-void DoubleLinkedList<T>::push(T& elem)
+void DoubleLinkedList<T>::push(T elem)
 {
     DNode<T>* newNode = new DNode(elem);
 
@@ -229,7 +230,7 @@ T* DoubleLinkedList<T>::removeAt(size_t i)
 }
 
 template<typename T>
-void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
+void DoubleLinkedList<T>::insertAt(T elem, size_t i)
 {
     if (i < 0 || i > this->length())
     {
@@ -265,7 +266,7 @@ void DoubleLinkedList<T>::insertAt(T& elem, size_t i)
 }
 
 template<typename T>
-void DoubleLinkedList<T>::insertSorted(T& elem)
+void DoubleLinkedList<T>::insertSorted(T elem)
 {
     if (this->len < 1 || elem < this->head->value)
     {
@@ -298,7 +299,44 @@ void DoubleLinkedList<T>::insertSorted(T& elem)
 }
 
 template<typename T>
-DNode<T>* DoubleLinkedList<T>::getMutAt(size_t i)
+void DoubleLinkedList<T>::swapValues(size_t i, size_t j)
+{
+    if (i < 0 || j < 0|| i >= this->length() || j >= this->length())
+    {
+        throw "Index out of range";
+    }
+
+    DNode<T>* nodei = this->getPtrAt(i);
+    DNode<T>* nodej = this->getPtrAt(j);
+
+    T valAtI = nodei->value;
+    T valAtJ = nodej->value;
+
+    nodei->update(valAtJ);
+    nodej->update(valAtI);
+}
+
+template<typename T>
+void DoubleLinkedList<T>::shuffle()
+{
+    std::srand(time(0));
+
+    size_t min = 0;
+    size_t max = this->length() - 1;
+    size_t l;
+    size_t u;
+
+    for (size_t i = 0; i < this->length(); ++i)
+    {
+        l = min + std::rand() % (max - min + 1);
+        u = min + std::rand() % (max - min + 1);
+
+        this->swapValues(l, u);
+    }
+}
+
+template<typename T>
+DNode<T>* DoubleLinkedList<T>::getPtrAt(size_t i)
 {
     if (i < 0 || i >= this->length())
     {
@@ -316,7 +354,7 @@ DNode<T>* DoubleLinkedList<T>::getMutAt(size_t i)
 }
 
 template<typename T>
-T& DoubleLinkedList<T>::getAt(size_t i) const
+T& DoubleLinkedList<T>::getAt(size_t i)
 {
     if (i < 0 || i >= this->length())
     {
