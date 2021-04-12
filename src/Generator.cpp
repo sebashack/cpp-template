@@ -19,8 +19,6 @@ void Generator::printSentences()
 {
     short generatedSentences = 0;
 
-    this->words.shuffle();
-
     while (generatedSentences < MAX_WORDS && this->words.length() > 0)
     {
         if (generatedSentences < 9)
@@ -39,6 +37,7 @@ void Generator::printSentences()
         ++generatedSentences;
     }
 
+    // Reset after printing so that we can reuse the generator.
     this->words.reset();
     this->words.shuffle();
 }
