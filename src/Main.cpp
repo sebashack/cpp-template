@@ -1,38 +1,21 @@
-#include "DoubleLinkedList.h"
-#include "Token.h"
 #include "AST.h"
 
 int main()
 {
-    //DoubleLinkedList<Token> ls;
 
-    //Token tk0("foo", D);
-    //Token tk1("bar", B);
-    //Token tk2("dood", A);
-    //Token tk3("duh", C);
+    ASTree<int>* root = new ASTree<int>(Sum);
 
-    //ls.insertSorted(tk0);
-    //ls.insertSorted(tk1);
-    //ls.insertSorted(tk2);
-    //ls.insertSorted(tk3);
+    ASTree<int>* l0 = root->addLNonTerminal(Multiply);
+    ASTree<int>* l1 = l0->addLNonTerminal(Divide);
+    l1->addLTerminal(16);
+    l1->addRTerminal(2);
+    l0->addRTerminal(3);
 
-    //for (Token tk : ls)
-    //{
-    //    std::cout << tk << std::endl;
-    //}
+    ASTree<int>* r1 = root->addRNonTerminal(Sum);
+    r1->addLTerminal(3);
+    r1->addRTerminal(8);
 
-    //std::cout << ls.length() << std::endl;
-    //
-
-    ASTree<char, int>* root = new ASTree<char, int>('+');
-
-    ASTree<char, int>* c0 = root->addLNonTerminal('-');
-
-    c0->addLTerminal(2);
-    c0->addRTerminal(3);
-
-    std::cout << c0->key << std::endl;
-
+    std::cout << root->eval() << std::endl;
 
     return 0;
 }

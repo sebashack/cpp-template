@@ -3,73 +3,118 @@
 #include <assert.h>
 #include <iostream>
 
+enum operation { Sum, Subtract, Multiply, Divide };
 
-template<typename K, typename V>
+template<typename V>
 class ASTree
 {
 public:
-    ASTree(K k);
+    ~ASTree<V>();
+    ASTree(operation op);
     ASTree(V v);
-    ASTree<K, V>* addLNonTerminal(K k);
-    ASTree<K, V>* addRNonTerminal(K k);
+    ASTree<V>* addLNonTerminal(operation op);
+    ASTree<V>* addRNonTerminal(operation op);
 
     void addLTerminal(V v);
     void addRTerminal(V v);
+    V eval();
 
-    K key;
+private:
+    operation op;
     V value;
-    ASTree<K, V>* left = nullptr;
-    ASTree<K, V>* right = nullptr;
+    bool is_terminal;
+    ASTree<V>* left = nullptr;
+    ASTree<V>* right = nullptr;
+
+    static V evalASNode(ASTree<V>* node)
+    {
+        if (!node->is_terminal)
+        {
+            assert (node->left != nullptr);
+            assert (node->right != nullptr);
+        }
+
+        if (node->is_terminal)
+        {
+            return node->value;
+        }
+
+        switch(node->op)
+        {
+        case Sum  :
+            return evalASNode(node->left) + evalASNode(node->right);
+        case Subtract  :
+            return evalASNode(node->left) - evalASNode(node->right);
+        case Multiply  :
+            return evalASNode(node->left) * evalASNode(node->right);
+        case Divide  :
+            return evalASNode(node->left) / evalASNode(node->right);
+        }
+
+        throw "Impossible";
+    }
 };
 
-template<typename K, typename V>
-ASTree<K, V>::ASTree(K k)
+template<typename V>
+ASTree<V>::~ASTree() {}
+
+template<typename V>
+ASTree<V>::ASTree(operation op)
 {
-    this->key = k;
+    this->op = op;
+    this->is_terminal = false;
 }
 
-template<typename K, typename V>
-ASTree<K, V>::ASTree(V v)
+template<typename V>
+ASTree<V>::ASTree(V v)
 {
     this->value = v;
+    this->is_terminal = true;
 }
 
-template<typename K, typename V>
-ASTree<K, V>* ASTree<K, V>::addLNonTerminal(K k)
+template<typename V>
+ASTree<V>* ASTree<V>::addLNonTerminal(operation op)
 {
     assert (this->left == nullptr);
-    ASTree<K, V>* newNode = new ASTree(k);
+    ASTree<V>* newNode = new ASTree(op);
 
     this->left = newNode;
 
     return newNode;
 }
 
-template<typename K, typename V>
-void ASTree<K, V>::addLTerminal(V v)
+template<typename V>
+void ASTree<V>::addLTerminal(V v)
 {
     assert (this->left == nullptr);
-    ASTree<K, V>* newNode = new ASTree(v);
+    ASTree<V>* newNode = new ASTree(v);
 
     this->left = newNode;
 }
 
-template<typename K, typename V>
-ASTree<K, V>* ASTree<K, V>::addRNonTerminal(K k)
+template<typename V>
+ASTree<V>* ASTree<V>::addRNonTerminal(operation op)
 {
     assert (this->right == nullptr);
-    ASTree<K, V>* newNode = new ASTree(k);
+    ASTree<V>* newNode = new ASTree(op);
 
     this->right = newNode;
 
     return newNode;
 }
 
-template<typename K, typename V>
-void ASTree<K, V>::addRTerminal(V v)
+template<typename V>
+void ASTree<V>::addRTerminal(V v)
 {
     assert (this->right == nullptr);
-    ASTree<K, V>* newNode = new ASTree(v);
+    ASTree<V>* newNode = new ASTree(v);
 
     this->right = newNode;
+}
+
+template<typename V>
+V ASTree<V>::eval()
+
+{
+    return ASTree::evalASNode(this);
 }
